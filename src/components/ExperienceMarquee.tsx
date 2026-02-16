@@ -1,26 +1,42 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 
-const LOGO_PLACEHOLDERS = [
-  "Empresa 1",
-  "Empresa 2",
-  "Empresa 3",
-  "Empresa 4",
-  "Empresa 5",
-  "Empresa 6",
+const MARQUEE_ITEMS = [
+  { logo: "/experience/prodeco.png", name: "Grupo Prodeco" },
+  { logo: "/experience/puerto_barranquilla.png", name: "Puerto de Barranquilla" },
+  { logo: "/experience/ferrero.png", name: "Ferrero Rocher" },
+  { logo: "/experience/sodimac.png", name: "Sodimac" },
+  { logo: "/experience/puerto_bahia.png", name: "Puerto Bahía" },
+  { logo: "/experience/bitco.png", name: "BITCO" },
+  { logo: "/experience/cannon.png", name: "Cannon" },
+  { logo: "/experience/paz_rio.png", name: "PazdelRío" },
+  { logo: "/experience/agrolife.png", name: "AGROlife Colombia" },
+  { logo: "/experience/procaps.png", name: "Procaps" },
+  { logo: "/experience/komatsu.png", name: "Komatsu" },
+  { logo: "/experience/eticos.png", name: "Eticos" },
+  { logo: "/experience/daluca.png", name: "Daluca International" },
 ];
 
-function LogoItem({ label }: { label: string }) {
+function LogoItem({ logo, name }: { logo: string; name: string }) {
   return (
     <div className="flex h-20 w-40 shrink-0 items-center justify-center rounded-xl border-2 border-border bg-white px-6 grayscale transition hover:border-accent/60 hover:grayscale-0">
-      <span className="text-sm font-medium text-muted-foreground">{label}</span>
+      <div className="relative h-full w-full">
+        <Image
+          src={logo}
+          alt={name}
+          fill
+          className="object-contain"
+          sizes="160px"
+        />
+      </div>
     </div>
   );
 }
 
 export function ExperienceMarquee() {
-  const duplicated = [...LOGO_PLACEHOLDERS, ...LOGO_PLACEHOLDERS];
+  const duplicated = [...MARQUEE_ITEMS, ...MARQUEE_ITEMS];
 
   return (
     <section
@@ -45,8 +61,8 @@ export function ExperienceMarquee() {
         </div>
         <div className="relative overflow-hidden">
           <div className="flex animate-marquee gap-6" style={{ width: "max-content" }}>
-            {duplicated.map((label, i) => (
-              <LogoItem key={`${label}-${i}`} label={label} />
+            {duplicated.map((item, i) => (
+              <LogoItem key={`${item.name}-${i}`} logo={item.logo} name={item.name} />
             ))}
           </div>
         </div>

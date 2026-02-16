@@ -36,7 +36,7 @@ export default function ContactanosPage() {
         <section className="border-b border-border bg-surface/80 py-12 md:py-16">
           <div className="mx-auto max-w-7xl px-6">
             <div className="grid gap-8 lg:grid-cols-2 lg:gap-16 lg:items-stretch">
-              <div className="rounded-2xl border border-border bg-white p-6 shadow-sm md:p-8">
+              <div className="order-2 rounded-2xl border border-border bg-white p-6 shadow-sm lg:order-1 md:p-8">
                 <h2 className="mb-6 text-xl font-semibold tracking-tight text-foreground">
                   Envíanos un mensaje
                 </h2>
@@ -44,9 +44,9 @@ export default function ContactanosPage() {
                   <ContactForm />
                 </Suspense>
               </div>
-              <div className="relative min-h-[320px] overflow-hidden rounded-2xl border border-border bg-surface-muted lg:min-h-0">
+              <div className="order-1 relative min-h-[320px] overflow-hidden rounded-2xl border border-border bg-surface-muted lg:order-2 lg:min-h-0">
                 <Image
-                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80"
+                  src="/Contact/customer_service_management-1024x683.jpg"
                   alt="Equipo y consultoría en logística"
                   fill
                   className="object-cover"

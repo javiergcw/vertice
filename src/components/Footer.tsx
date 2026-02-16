@@ -95,8 +95,23 @@ export function Footer() {
             </h3>
             <ul className="space-y-2 text-sm text-footer-muted" role="list">
               <li>
-                <a href="mailto:contacto@vertice.com" className="hover:text-white">
-                  contacto@vertice.com
+                <a href="mailto:glondono@vertice.com" className="hover:text-white">
+                  glondono@vertice.com
+                </a>
+              </li>
+              <li>
+                <a href="mailto:cgavilan@vertice.com" className="hover:text-white">
+                  cgavilan@vertice.com
+                </a>
+              </li>
+              <li>
+                <a href="mailto:pmora@vertice.com" className="hover:text-white">
+                  pmora@vertice.com
+                </a>
+              </li>
+              <li>
+                <a href="mailto:comercial@vertice.com" className="hover:text-white">
+                  comercial@vertice.com
                 </a>
               </li>
               <li>

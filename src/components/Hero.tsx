@@ -38,12 +38,13 @@ export function Hero() {
           </div>
           <div className="relative aspect-4/3 overflow-hidden rounded-2xl border-2 border-border bg-surface shadow-sm transition-colors hover:border-accent/40 lg:aspect-square">
             <Image
-              src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=900&q=85"
+              src="/Home/Contenedores-en-puerto-3-1-scaled.jpg"
               alt="Cadena de suministro y logística internacional — contenedores y comercio exterior"
               fill
               className="object-cover"
               sizes="(max-width: 1024px) 100vw, 50vw"
               priority
+              unoptimized
             />
           </div>
         </div>
