@@ -2,25 +2,158 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #0f172a;
+  /* VÉRTICE theme - Colores estándar */
+  --primary: #1e3a5f;
+  --primary-hover: #152a47;
+  --accent: #c2410c;
+  --accent-hover: #9a3410;
+  --accent-muted: #ea580c;
+  --muted: #64748b;
+  --muted-foreground: #475569;
+  --border: #e2e8f0;
+  --card-bg: #ffffff;
+  /* Superficies (fondos alternativos) */
+  --surface: #f8fafc;
+  --surface-muted: #f1f5f9;
+  /* Footer */
+  --footer-bg: #0f172a;
+  --footer-foreground: #cbd5e1;
+  --footer-muted: #94a3b8;
+  /* Tipografía estándar */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+  /* Espaciado de secciones */
+  --section-py: 3rem;
+  --section-py-md: 4rem;
+  --section-py-lg: 5rem;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-muted: var(--accent-muted);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-card-bg: var(--card-bg);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-footer-bg: var(--footer-bg);
+  --color-footer-foreground: var(--footer-foreground);
+  --color-footer-muted: var(--footer-muted);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-serif: Georgia, "Times New Roman", serif;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
 }
+
+/* Clases utilitarias para tipografía estándar */
+.page-heading {
+  font-size: var(--text-3xl);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+@media (min-width: 768px) {
+  .page-heading { font-size: var(--text-4xl); }
+}
+@media (min-width: 1024px) {
+  .page-heading { font-size: var(--text-5xl); }
+}
+
+.section-heading {
+  font-size: var(--text-2xl);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+@media (min-width: 768px) {
+  .section-heading { font-size: var(--text-3xl); }
+}
+
+.body-text {
+  font-size: var(--text-base);
+  line-height: 1.625;
+}
+@media (min-width: 768px) {
+  .body-text { font-size: var(--text-lg); }
+}
+
+@keyframes marquee {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* Animaciones de entrada al hacer scroll */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.6s ease-out,
+    transform 0.6s ease-out;
+}
+
+.animate-in.animate-in-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.animate-in.animate-in-fade {
+  transform: none;
+}
+
+.animate-in-delay-1 { transition-delay: 0.1s; }
+.animate-in-delay-2 { transition-delay: 0.2s; }
+
+/* Icono sutil de “subir” para el botón scroll-to-top */
+@keyframes scroll-up-hint {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+.animate-scroll-up-hint {
+  animation: scroll-up-hint 2s ease-in-out infinite;
+}
+.animate-in-delay-3 { transition-delay: 0.3s; }
+.animate-in-delay-4 { transition-delay: 0.4s; }
+.animate-in-delay-5 { transition-delay: 0.5s; }
