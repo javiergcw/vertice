@@ -1,6 +1,7 @@
 import { AnimateIn } from "@/components/AnimateIn";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { ProgramasCarousel, type ProgramaItem } from "@/components/ProgramasCarousel";
 import Link from "next/link";
 import type { Metadata } from "next";
 
@@ -53,31 +54,51 @@ export const metadata: Metadata = {
 const INTRO =
   "En VÉRTICE desarrollamos programas de formación orientados al fortalecimiento de competencias técnicas y estratégicas en comercio exterior, logística, seguridad de la cadena de suministro y cumplimiento normativo, alineados a estándares internacionales y necesidades reales del sector empresarial.";
 
-const CURSOS = [
+const CURSOS: ProgramaItem[] = [
   {
     title: "Comercio Exterior",
     description:
-      "Fundamentos operativos y estratégicos de importaciones y exportaciones, normativa aduanera, regímenes, costos y documentación internacional.",
+      "Importación, exportación, normativa aduanera y documentación comercial para optimizar operaciones y cumplimiento.",
+    descriptionLista:
+      "Formación integral en procesos de importación y exportación, normativa aduanera, logística internacional y documentación comercial, orientada a optimizar operaciones y asegurar cumplimiento regulatorio.",
+    icon: "Globe",
+    iconColor: "#2563EB",
   },
   {
-    title: "Gestión de Riesgos – ISO 31000",
+    title: "Gestión de Riesgos (ISO 31000)",
     description:
-      "Implementación de modelos de gestión de riesgos bajo estándar ISO 31000 aplicados a operaciones logísticas, comercio exterior y cumplimiento corporativo.",
+      "Identificación, análisis y tratamiento de riesgos bajo ISO 31000 para decisiones estratégicas y resiliencia.",
+    descriptionLista:
+      "Programa enfocado en la identificación, análisis y tratamiento de riesgos organizacionales bajo el marco ISO 31000, fortaleciendo la toma de decisiones estratégicas y la resiliencia empresarial.",
+    icon: "ShieldAlert",
+    iconColor: "#F59E0B",
   },
   {
-    title: "Seguridad de la Cadena de Suministro (BASC – OEA – ISO 28000)",
+    title: "Seguridad de la Cadena de Suministro (BASC, OEA, ISO 28000)",
     description:
-      "Diseño, implementación y fortalecimiento de sistemas de seguridad logística bajo estándares y programas internacionales.",
+      "Implementación de sistemas de seguridad logística según estándares internacionales y cumplimiento en comercio exterior.",
+    descriptionLista:
+      "Capacitación en implementación y mantenimiento de sistemas de gestión de seguridad logística basados en estándares internacionales, orientada a proteger operaciones y garantizar cumplimiento en comercio internacional.",
+    icon: "PackageCheck",
+    iconColor: "#16A34A",
   },
   {
-    title: "Curso Auditor OEA – BASC",
+    title: "Curso Auditor OEA-BASC",
     description:
-      "Formación técnica para la planificación, ejecución y seguimiento de auditorías internas en seguridad de la cadena de suministro y cumplimiento.",
+      "Competencias de auditoría en OEA y BASC: evaluación de controles, verificación de cumplimiento e informes técnicos.",
+    descriptionLista:
+      "Entrenamiento especializado para desarrollar competencias de auditoría en estándares OEA y BASC, incluyendo evaluación de controles, verificación de cumplimiento y elaboración de informes técnicos.",
+    icon: "ClipboardCheck",
+    iconColor: "#7C3AED",
   },
   {
-    title: "Aprovechamiento de Acuerdos Internacionales – Criterios de Origen",
+    title: "Aprovechamiento de Acuerdos Internacionales con Criterios de Origen",
     description:
-      "Aplicación práctica de tratados comerciales, reglas de origen, certificaciones y estrategias para optimización arancelaria.",
+      "Maximizar beneficios arancelarios con tratados comerciales, reglas de origen y gestión documental.",
+    descriptionLista:
+      "Programa orientado a maximizar beneficios arancelarios mediante el correcto uso de tratados comerciales, aplicación de reglas de origen y gestión documental asociada al comercio exterior.",
+    icon: "Handshake",
+    iconColor: "#DC2626",
   },
 ];
 
@@ -194,9 +215,6 @@ export default function FormacionPage() {
               <p className="mt-3 max-w-2xl text-base text-muted-foreground md:text-lg">
                 {INTRO}
               </p>
-              <p className="mt-2 max-w-2xl text-sm text-muted-foreground md:text-base">
-                Nuestros programas incluyen: Comercio Exterior, Gestión de Riesgos (ISO 31000), Seguridad de la Cadena de Suministro (BASC, OEA, ISO 28000), Curso Auditor OEA-BASC y Aprovechamiento de Acuerdos Internacionales con Criterios de Origen.
-              </p>
             </div>
           </section>
         </AnimateIn>
@@ -204,33 +222,42 @@ export default function FormacionPage() {
         <AnimateIn delay={1}>
           <section
             className="border-b border-border bg-white py-12 md:py-16"
-          aria-labelledby="cursos-titulo"
-          id="cursos-cortos-especializados"
-        >
-          <div className="mx-auto max-w-7xl px-6">
-            <h2
-              id="cursos-titulo"
-              className="border-b-2 border-accent pb-2 text-2xl font-semibold tracking-tight text-foreground md:text-3xl"
-            >
-              Cursos cortos especializados
-            </h2>
-            <ul className="mt-10 space-y-6">
-              {CURSOS.map((curso, index) => (
-                <li
-                  key={curso.title}
-                  className="rounded-2xl border border-border bg-card-bg p-6 shadow-sm md:p-8"
-                >
-                  <h3 className="text-lg font-semibold text-primary md:text-xl">
-                    {index + 1}. {curso.title}
-                  </h3>
-                  <p className="mt-2 text-base leading-relaxed text-muted-foreground">
-                    {curso.description}
-                  </p>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
+            aria-labelledby="programas-titulo"
+            id="cursos-cortos-especializados"
+          >
+            <div className="mx-auto max-w-7xl px-6">
+              <h2
+                id="programas-titulo"
+                className="border-b-2 border-accent pb-2 text-2xl font-semibold tracking-tight text-foreground md:text-3xl"
+              >
+                Nuestros programas
+              </h2>
+              <div className="mt-10">
+                <ProgramasCarousel items={CURSOS} headingId="programa-actual-titulo" />
+              </div>
+              <h2
+                id="cursos-titulo"
+                className="mt-12 border-b-2 border-accent pb-2 text-2xl font-semibold tracking-tight text-foreground md:text-3xl"
+              >
+                Cursos cortos especializados
+              </h2>
+              <ul className="mt-10 space-y-6">
+                {CURSOS.map((curso, index) => (
+                  <li
+                    key={curso.title}
+                    className="rounded-2xl border border-border bg-card-bg p-6 shadow-sm md:p-8"
+                  >
+                    <h3 className="text-lg font-semibold text-primary md:text-xl">
+                      {index + 1}. {curso.title}
+                    </h3>
+                    <p className="mt-2 text-base leading-relaxed text-muted-foreground">
+                      {curso.descriptionLista ?? curso.description}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </section>
         </AnimateIn>
 
         <AnimateIn delay={2}>

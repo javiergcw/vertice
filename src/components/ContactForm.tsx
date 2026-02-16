@@ -5,12 +5,42 @@ import { useSearchParams } from "next/navigation";
 
 export function ContactForm() {
   const [sent, setSent] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const searchParams = useSearchParams();
   const motivoFromUrl = searchParams.get("motivo") ?? "";
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setSent(true);
+    setError(null);
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const payload = {
+      nombre: formData.get("nombre") as string,
+      email: formData.get("email") as string,
+      motivo: formData.get("motivo") as string,
+      mensaje: formData.get("mensaje") as string,
+    };
+
+    setLoading(true);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok) {
+        setError(data.error ?? "No se pudo enviar el mensaje. Intenta de nuevo.");
+        return;
+      }
+      setSent(true);
+    } catch {
+      setError("Error de conexión. Intenta de nuevo.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   if (sent) {
@@ -25,6 +55,11 @@ export function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
+      {error && (
+        <div className="rounded-lg bg-red-50 p-4 text-sm text-red-800">
+          {error}
+        </div>
+      )}
       <div>
         <label htmlFor="nombre" className="mb-1.5 block text-sm font-medium text-foreground">
           Nombre
@@ -85,9 +120,10 @@ export function ContactForm() {
       </div>
       <button
         type="submit"
-        className="w-full rounded-lg bg-primary px-5 py-3 text-base font-medium text-white transition-colors hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto"
+        disabled={loading}
+        className="w-full rounded-lg bg-primary px-5 py-3 text-base font-medium text-white transition-colors hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:opacity-60 sm:w-auto"
       >
-        Enviar mensaje
+        {loading ? "Enviando..." : "Enviar mensaje"}
       </button>
     </form>
   );
