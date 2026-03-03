@@ -157,3 +157,32 @@ body {
 .animate-in-delay-3 { transition-delay: 0.3s; }
 .animate-in-delay-4 { transition-delay: 0.4s; }
 .animate-in-delay-5 { transition-delay: 0.5s; }
+
+/* Metodología VÉRTICE – formas y acentos */
+.methodology-card-accent {
+  position: relative;
+  overflow: hidden;
+}
+.methodology-card-accent::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 140px;
+  height: 140px;
+  background: linear-gradient(135deg, var(--accent) 0%, transparent 70%);
+  opacity: 0.12;
+  border-radius: 0 0 0 100%;
+}
+.methodology-letter-ring {
+  box-shadow: 0 0 0 3px var(--primary), 0 0 0 6px rgba(30, 58, 95, 0.15);
+}
+
+/* Transición carousel metodología */
+@keyframes methodology-fade {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-methodology-fade {
+  animation: methodology-fade 0.4s ease-out forwards;
+}

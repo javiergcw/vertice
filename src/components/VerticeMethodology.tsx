@@ -1,128 +1,158 @@
 "use client";
 
-import Image from "next/image";
+import { useState, useEffect, useCallback } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const METHODOLOGY_ITEMS = [
-    {
-        letter: "V",
-        text: "erificación y Validación de cumplimiento normativo,",
-    },
-    {
-        letter: "E",
-        text: "strategia en comercio exterior y cadena de suministro,",
-    },
-    {
-        letter: "R",
-        text: "etroalimentación continua y gestión integral de riesgos,",
-    },
-    {
-        letter: "T",
-        text: "écnicas especializadas en seguridad logística y aduanas,",
-    },
-    {
-        letter: "I",
-        text: "nnovación y mejora en procesos organizacionales,",
-    },
-    {
-        letter: "C",
-        text: "apacitación y fortalecimiento de competencias del equipo",
-    },
-    {
-        letter: "E",
-        text: "cosistemas de crecimiento internacional y cumplimiento sostenible.",
-    },
+  { letter: "V", text: "erificación y Validación de cumplimiento normativo," },
+  { letter: "E", text: "strategia en comercio exterior y cadena de suministro," },
+  { letter: "R", text: "etroalimentación continua y gestión integral de riesgos," },
+  { letter: "T", text: "écnicas especializadas en seguridad logística y aduanas," },
+  { letter: "I", text: "nnovación y mejora en procesos organizacionales," },
+  { letter: "C", text: "apacitación y fortalecimiento de competencias del equipo" },
+  { letter: "E", text: "cosistemas de crecimiento internacional y cumplimiento sostenible." },
 ];
 
 const EXPLANATION_ITEMS = [
-    {
-        letter: "V",
-        text: "Refleja las auditorías y diagnósticos en cumplimiento normativo (OEA, BASC, ISO 28000) y validación de procesos de comercio exterior.",
-    },
-    {
-        letter: "E",
-        text: "Representa la asesoría estratégica para la expansión internacional y optimización de costos y procesos.",
-    },
-    {
-        letter: "R",
-        text: "Alude a la gestión de riesgos logísticos, operativos y sancionatorios, así como a la retroalimentación para la mejora continua.",
-    },
-    {
-        letter: "T",
-        text: "Hace referencia a las técnicas especializadas en seguridad de la cadena de suministro, transporte y trámites aduaneros.",
-    },
-    {
-        letter: "I",
-        text: "Corresponde a la innovación y digitalización de procesos, así como al cambio organizacional impulsado por la consultoría.",
-    },
-    {
-        letter: "C",
-        text: "Enfatiza la formación y capacitación especializada (presencial y virtual) para el desarrollo del talento humano.",
-    },
-    {
-        letter: "E",
-        text: "Simboliza la creación de ecosistemas organizacionales empoderados, orientados al cumplimiento, la eficiencia y crecimiento.",
-    },
+  "Refleja las auditorías y diagnósticos en cumplimiento normativo (OEA, BASC, ISO 28000) y validación de procesos de comercio exterior.",
+  "Representa la asesoría estratégica para la expansión internacional y optimización de costos y procesos.",
+  "Alude a la gestión de riesgos logísticos, operativos y sancionatorios, así como a la retroalimentación para la mejora continua.",
+  "Hace referencia a las técnicas especializadas en seguridad de la cadena de suministro, transporte y trámites aduaneros.",
+  "Corresponde a la innovación y digitalización de procesos, así como al cambio organizacional impulsado por la consultoría.",
+  "Enfatiza la formación y capacitación especializada (presencial y virtual) para el desarrollo del talento humano.",
+  "Simboliza la creación de ecosistemas organizacionales empoderados, orientados al cumplimiento, la eficiencia y crecimiento.",
 ];
 
+const CAROUSEL_INTERVAL_MS = 4500;
+
 export function VerticeMethodology() {
-    return (
-        <section className="bg-white py-16 md:py-24">
-            <div className="mx-auto max-w-7xl px-6">
-                <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-                    <h2 className="flex items-start gap-3 text-2xl font-semibold tracking-tight text-foreground md:text-3xl lg:text-4xl">
-                        <span className="mt-1 h-9 w-1 shrink-0 rounded-full bg-accent md:h-10" aria-hidden />
-                        <span>Significado de la metodología V.É.R.T.I.C.E.</span>
-                    </h2>
-                    <div className="relative h-20 w-64 md:h-24 md:w-80">
-                        <Image
-                            src="/VÉRTICE-02.png"
-                            alt="Vértice Logo"
-                            fill
-                            className="object-contain object-right"
-                            priority
-                        />
-                    </div>
-                </div>
+  const [activeIndex, setActiveIndex] = useState(0);
 
-                <div className="mt-12 space-y-2 border-l-4 border-accent/20 pl-6 py-2">
-                    <p className="text-lg font-medium text-foreground">
-                        Basado en los servicios y enfoque estratégico de la firma consultora:
-                    </p>
-                </div>
+  const goTo = useCallback((index: number) => {
+    setActiveIndex(index);
+  }, []);
 
-                <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-1">
-                    {METHODOLOGY_ITEMS.map((item, index) => (
-                        <div key={index} className="flex items-start gap-4">
-                            <span className="text-2xl font-bold text-foreground md:text-3xl leading-none">
-                                {item.letter}
-                            </span>
-                            <span className="text-lg text-muted-foreground md:text-xl leading-snug">
-                                {item.text}
-                            </span>
-                        </div>
-                    ))}
-                </div>
+  const next = useCallback(() => {
+    setActiveIndex((i) => (i + 1) % METHODOLOGY_ITEMS.length);
+  }, []);
 
-                <div className="mt-20 space-y-2 border-l-4 border-accent/20 pl-6 py-2">
-                    <p className="text-lg font-medium text-foreground">
-                        Explicación del acrónimo alineado con los servicios de VÉRTICE:
-                    </p>
-                </div>
+  const prev = useCallback(() => {
+    setActiveIndex((i) => (i - 1 + METHODOLOGY_ITEMS.length) % METHODOLOGY_ITEMS.length);
+  }, []);
 
-                <div className="mt-8 space-y-8">
-                    {EXPLANATION_ITEMS.map((item, index) => (
-                        <div key={index} className="flex items-start gap-4">
-                            <span className="text-2xl font-bold text-foreground md:text-3xl leading-none">
-                                {item.letter}:
-                            </span>
-                            <span className="text-lg text-muted-foreground md:text-xl leading-relaxed">
-                                {item.text}
-                            </span>
-                        </div>
-                    ))}
-                </div>
+  useEffect(() => {
+    const t = setInterval(next, CAROUSEL_INTERVAL_MS);
+    return () => clearInterval(t);
+  }, [next]);
+
+  const current = METHODOLOGY_ITEMS[activeIndex];
+  const explanation = EXPLANATION_ITEMS[activeIndex];
+
+  return (
+    <section
+      className="relative overflow-hidden py-0"
+      aria-labelledby="methodology-title"
+    >
+      {/* Fondo sin card */}
+      <div
+        className="absolute inset-0 -z-10"
+        style={{
+          background:
+            "linear-gradient(165deg, var(--surface) 0%, var(--surface-muted) 45%, var(--background) 100%)",
+        }}
+      />
+      <div
+        className="absolute -right-32 -top-32 h-96 w-96 rounded-full opacity-[0.07]"
+        style={{ background: "var(--primary)" }}
+        aria-hidden
+      />
+      <div
+        className="absolute -bottom-24 -left-24 h-72 w-72 rounded-full opacity-[0.06]"
+        style={{ background: "var(--accent)" }}
+        aria-hidden
+      />
+
+      {/* Título de sección + contenido */}
+      <div className="mx-auto max-w-3xl px-6 pt-12 pb-14 md:pt-16 md:pb-20">
+        <header className="border-b border-border/80 pb-8 md:pb-10">
+          <h2
+            id="methodology-title"
+            className="flex items-center justify-center gap-3 text-center text-3xl font-bold tracking-tight text-foreground md:text-4xl lg:text-5xl"
+          >
+            <span
+              className="h-10 w-1 shrink-0 rounded-full bg-accent md:h-12"
+              aria-hidden
+            />
+            <span>Significado de la metodología V.É.R.T.I.C.E.</span>
+          </h2>
+          <p className="mt-3 text-center text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground md:text-sm">
+            Basado en los servicios y enfoque estratégico de la firma
+          </p>
+        </header>
+        {/* Carousel: flechas + texto que cambia */}
+        <div className="mt-10 flex items-center justify-center gap-4 md:gap-6">
+          <button
+            type="button"
+            onClick={prev}
+            aria-label="Anterior"
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-accent/50 hover:bg-surface hover:text-accent"
+          >
+            <ChevronLeft className="h-6 w-6" strokeWidth={2} />
+          </button>
+          <div className="min-w-0 flex-1 text-center">
+            <div key={activeIndex} className="animate-methodology-fade">
+              <p className="text-lg font-medium leading-relaxed text-foreground md:text-xl">
+                <span className="font-semibold">{current.letter}</span>
+                {current.text}
+              </p>
+              <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
+                {explanation}
+              </p>
             </div>
-        </section>
-    );
-}
+          </div>
+          <button
+            type="button"
+            onClick={next}
+            aria-label="Siguiente"
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-accent/50 hover:bg-surface hover:text-accent"
+          >
+            <ChevronRight className="h-6 w-6" strokeWidth={2} />
+          </button>
+        </div>
 
+        {/* Fila de letras: una sola línea en móvil, estilo referencia */}
+        <div className="mt-12 flex flex-nowrap items-center justify-center gap-2 md:gap-4">
+          {METHODOLOGY_ITEMS.map((item, i) => {
+            const isActive = activeIndex === i;
+            return (
+              <button
+                key={i}
+                type="button"
+                onClick={() => goTo(i)}
+                aria-label={`Ver ${item.letter}`}
+                aria-current={isActive ? "true" : undefined}
+                className={`flex shrink-0 items-center justify-center rounded-full font-bold text-white transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-accent/25 ${
+                  isActive
+                    ? "h-9 w-9 text-sm ring-2 ring-accent-hover md:h-14 md:w-14 md:text-xl"
+                    : "h-8 w-8 text-xs md:h-11 md:w-11 md:text-base hover:opacity-80"
+                }`}
+                style={
+                  isActive
+                    ? {
+                        backgroundColor: "var(--accent)",
+                      }
+                    : {
+                        backgroundColor: "#94a3b8",
+                        border: "1px solid #64748b",
+                      }
+                }
+              >
+                {item.letter}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}

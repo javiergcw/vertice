@@ -19,16 +19,20 @@ type TeamCarouselProps = {
 const AUTOPLAY_INTERVAL = 6000;
 const DESKTOP_PAGE_SIZE = 3;
 
+const LINE_CLAMP_HEIGHT = "4.5rem"; // ~3 líneas con text-sm leading-relaxed
+
 function MemberCard({ member }: { member: TeamMember }) {
+    const [expanded, setExpanded] = useState(false);
+
     return (
-        <article className="flex w-full flex-col overflow-hidden rounded-2xl border border-border bg-white shadow-sm">
+        <article className="group flex w-full flex-col overflow-hidden rounded-2xl border border-border bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-accent/30 hover:shadow-lg">
             {/* Photo */}
             <div className="relative h-64 w-full overflow-hidden">
                 <Image
                     src={member.image}
                     alt={member.name}
                     fill
-                    className="object-cover object-top transition-transform duration-500 hover:scale-105"
+                    className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
                     sizes="(max-width: 768px) 100vw, 33vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
@@ -39,13 +43,37 @@ function MemberCard({ member }: { member: TeamMember }) {
                 </div>
             </div>
             {/* Content */}
-            <div className="flex flex-1 flex-col gap-3 p-6">
+            <div className="flex flex-1 flex-col p-6">
                 <h3 className="text-lg font-semibold tracking-tight text-foreground">
                     {member.name}
                 </h3>
-                <p className="text-sm leading-relaxed text-muted-foreground">
-                    {member.description}
-                </p>
+                <div
+                    className="relative overflow-hidden transition-all duration-300 ease-out"
+                    style={{
+                        maxHeight: expanded ? "500px" : LINE_CLAMP_HEIGHT,
+                    }}
+                >
+                    <p
+                        className={`text-sm leading-relaxed text-muted-foreground ${!expanded ? "line-clamp-3" : ""}`}
+                    >
+                        {member.description}
+                    </p>
+                    {/* Degradado al final cuando está colapsado */}
+                    {!expanded && (
+                        <div
+                            className="absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-white to-transparent pointer-events-none"
+                            aria-hidden
+                        />
+                    )}
+                </div>
+                {/* Recuadro completo clicable: Leer más / Ver menos, gris */}
+                <button
+                    type="button"
+                    onClick={() => setExpanded((e) => !e)}
+                    className="mt-3 flex w-full items-center justify-center rounded-lg py-3 text-center text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                >
+                    {expanded ? "Ver menos" : "Leer más"}
+                </button>
             </div>
         </article>
     );
@@ -114,7 +142,7 @@ export function TeamCarousel({ members }: TeamCarouselProps) {
         <>
             {/* ══ DESKTOP ══ */}
             <div className="hidden md:block">
-                <div className="grid grid-cols-3 gap-6">
+                <div className="grid grid-cols-3 items-start gap-6">
                     {visibleDesktop.map((member) => (
                         <MemberCard key={member.id} member={member} />
                     ))}
