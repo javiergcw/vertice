@@ -49,6 +49,13 @@ export function ContactForm() {
         <p className="font-medium text-primary">
           Gracias por tu mensaje. Te contactaremos pronto.
         </p>
+        <button
+          type="button"
+          onClick={() => setSent(false)}
+          className="mt-4 rounded-lg bg-primary px-5 py-3 text-base font-medium text-white transition-colors hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+        >
+          Enviar otro mensaje
+        </button>
       </div>
     );
   }

@@ -72,7 +72,7 @@ export async function POST(request: Request) {
     <p><strong>Motivo:</strong> ${escapeHtml(motivoLabel)}</p>
     <p><strong>Mensaje:</strong></p>
     <pre style="white-space: pre-wrap; font-family: inherit;">${escapeHtml(body.mensaje)}</pre>
-    <p><em>Enviado desde vertice.com.co</em></p>
+    <p><em>Enviado desde verticeconsulting.co</em></p>
   `.trim();
 
   try {

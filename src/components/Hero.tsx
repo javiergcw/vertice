@@ -29,7 +29,7 @@ export function Hero() {
                 Solicitar asesoría
               </Link>
               <Link
-                href="#experiencia"
+                href="experiencia"
                 className="inline-flex items-center justify-center rounded-lg border-2 border-border bg-white px-6 py-3.5 text-base font-medium text-muted-foreground transition-colors hover:border-accent hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
               >
                 Ver experiencia
