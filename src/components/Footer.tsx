@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { CONTACT_ADDRESS, CONTACT_EMAIL, CONTACT_PHONE, CONTACT_WHATSAPP_URL } from "@/data/contact";
 
 const FOOTER_LINKS = [
   { label: "Inicio", href: "/" },
@@ -7,8 +8,6 @@ const FOOTER_LINKS = [
   { label: "Formación", href: "/formacion" },
   { label: "Experiencia", href: "/experiencia" },
 ];
-
-const ADDRESS = "Vía 40 con 98 — Parque Logístico LOGIKA";
 
 export function Footer() {
   return (
@@ -87,7 +86,7 @@ export function Footer() {
             <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white">
               Dirección
             </h3>
-            <p className="text-sm text-footer-muted">{ADDRESS}</p>
+            <p className="text-sm text-footer-muted">{CONTACT_ADDRESS}</p>
           </div>
           <div>
             <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white">
@@ -95,13 +94,13 @@ export function Footer() {
             </h3>
             <ul className="space-y-2 text-sm text-footer-muted" role="list">
               <li>
-                <a href="mailto:comercial@verticeconsulting.co" className="hover:text-white">
-                  comercial@verticeconsulting.co
+                <a href={CONTACT_WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="hover:text-white">
+                  {CONTACT_EMAIL}
                 </a>
               </li>
               <li>
-                <a href="tel:+573001234567" className="hover:text-white">
-                  +57 300 123 4567
+                <a href={CONTACT_WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="hover:text-white">
+                  {CONTACT_PHONE}
                 </a>
               </li>
             </ul>

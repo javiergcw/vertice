@@ -2,6 +2,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ContactForm } from "@/components/ContactForm";
 import { MapViewDynamic } from "@/components/MapViewDynamic";
+import { CONTACT_ADDRESS, CONTACT_EMAIL, CONTACT_PHONE, CONTACT_WHATSAPP_URL } from "@/data/contact";
 import Image from "next/image";
 import { Suspense } from "react";
 import type { Metadata } from "next";
@@ -9,10 +10,8 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Contáctanos | VÉRTICE",
   description:
-    "Contacte a VÉRTICE. Oficinas en Vía 40 con 98 — Parque Logístico LOGIKA.",
+    "Contacte a VÉRTICE. Oficinas en Via 40 #85-999, Riomar, Barranquilla, Atlántico.",
 };
-
-const ADDRESS = "Vía 40 con 98 — Parque Logístico LOGIKA";
 
 export default function ContactanosPage() {
   return (
@@ -82,7 +81,7 @@ export default function ContactanosPage() {
                 </span>
                 <div>
                   <p className="font-medium text-foreground">Oficinas</p>
-                  <p className="text-base text-muted-foreground md:text-lg">{ADDRESS}</p>
+                  <p className="text-base text-muted-foreground md:text-lg">{CONTACT_ADDRESS}</p>
                 </div>
               </div>
               {/* Contacto directo */}
@@ -99,10 +98,10 @@ export default function ContactanosPage() {
                   <p className="font-medium text-foreground">Contacto directo</p>
                   <ul className="mt-1 space-y-1 text-base text-muted-foreground" role="list">
                     <li>
-                      <a href="mailto:contacto@vertice.com" className="hover:text-primary">contacto@vertice.com</a>
+                      <a href={CONTACT_WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="hover:text-primary">{CONTACT_EMAIL}</a>
                     </li>
                     <li>
-                      <a href="tel:+573001234567" className="hover:text-primary">+57 300 123 4567</a>
+                      <a href={CONTACT_WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="hover:text-primary">{CONTACT_PHONE}</a>
                     </li>
                   </ul>
                 </div>

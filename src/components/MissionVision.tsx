@@ -29,7 +29,7 @@ export function MissionVision() {
                   Misión
                 </h3>
               </div>
-              <p className="text-base text-muted-foreground leading-relaxed transition-colors group-hover:text-foreground/90 md:text-lg">
+              <p className="text-base text-muted-foreground leading-relaxed text-justify transition-colors group-hover:text-foreground/90 md:text-lg">
                 Impulsar el fortalecimiento estratégico y operativo de las organizaciones mediante soluciones integrales en comercio exterior, logística y cadena de suministro, gestión de riesgos, cumplimiento normativo y formación especializada, apalancadas en conocimiento técnico, experiencia senior y herramientas innovadoras que promuevan la eficiencia, la seguridad y la competitividad empresarial en entornos globales.
               </p>
             </div>
@@ -46,7 +46,7 @@ export function MissionVision() {
                   Visión
                 </h3>
               </div>
-              <p className="text-base text-muted-foreground leading-relaxed transition-colors group-hover:text-foreground/90 md:text-lg">
+              <p className="text-base text-muted-foreground leading-relaxed text-justify transition-colors group-hover:text-foreground/90 md:text-lg">
                 Ser reconocidos a 2031 como la firma boutique de consultoría líder en la Costa Caribe con proyección nacional e internacional, destacada por su excelencia técnica, enfoque estratégico y capacidad de generar transformación sostenible en las organizaciones, consolidándonos como aliados clave en procesos de internacionalización, seguridad de la cadena de suministro y desarrollo logístico empresarial.
               </p>
             </div>

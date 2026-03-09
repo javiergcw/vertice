@@ -1,6 +1,5 @@
+import { CONTACT_ADDRESS } from "@/data/contact";
 import { MapViewDynamic } from "./MapViewDynamic";
-
-const ADDRESS = "Vía 40 con 98 — Parque Logístico LOGIKA";
 
 export function Location() {
   return (
@@ -26,7 +25,7 @@ export function Location() {
             </span>
             <div>
               <p className="font-medium text-foreground">Oficinas</p>
-              <p className="text-base text-muted-foreground md:text-lg">{ADDRESS}</p>
+              <p className="text-base text-muted-foreground md:text-lg">{CONTACT_ADDRESS}</p>
             </div>
           </div>
           <div className="aspect-video overflow-hidden rounded-2xl">

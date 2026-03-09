@@ -1,11 +1,11 @@
 "use client";
 
+import { CONTACT_ADDRESS } from "@/data/contact";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import { useEffect, useRef, useState } from "react";
 
-export const ADDRESS = "Vía 40 con 98 — Parque Logístico LOGIKA";
-// Coordenadas aproximadas: Parque Logístico LOGIKA, Barranquilla (Vía 40 #85-999)
+// Coordenadas aproximadas: Via 40 #85-999, Riomar, Barranquilla
 const CENTER: [number, number] = [10.975, -74.782];
 const ZOOM = 15;
 
@@ -45,7 +45,7 @@ export function MapView({ className = "", showPopup = true }: MapViewProps) {
 
     const marker = L.marker(CENTER, { icon: createDefaultIcon() }).addTo(map);
     if (showPopup) {
-      marker.bindPopup(`<strong>VÉRTICE</strong><br/>${ADDRESS}`).openPopup();
+      marker.bindPopup(`<strong>VÉRTICE</strong><br/>${CONTACT_ADDRESS}`).openPopup();
     }
 
     return () => {

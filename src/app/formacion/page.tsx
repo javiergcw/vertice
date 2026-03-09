@@ -2,6 +2,7 @@ import { AnimateIn } from "@/components/AnimateIn";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { ProgramasCarousel, type ProgramaItem } from "@/components/ProgramasCarousel";
+import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 
@@ -54,7 +55,9 @@ export const metadata: Metadata = {
 const INTRO =
   "En VÉRTICE desarrollamos programas de formación orientados al fortalecimiento de competencias técnicas y estratégicas en comercio exterior, logística, seguridad de la cadena de suministro y cumplimiento normativo, alineados a estándares internacionales y necesidades reales del sector empresarial.";
 
-const CURSOS: ProgramaItem[] = [
+type CursoConImagen = ProgramaItem & { image: string };
+
+const CURSOS: CursoConImagen[] = [
   {
     title: "Comercio Exterior",
     description:
@@ -63,6 +66,7 @@ const CURSOS: ProgramaItem[] = [
       "Formación integral en procesos de importación y exportación, normativa aduanera, logística internacional y documentación comercial, orientada a optimizar operaciones y asegurar cumplimiento regulatorio.",
     icon: "Globe",
     iconColor: "#2563EB",
+    image: "/formation/comercio_exterior.png",
   },
   {
     title: "Gestión de Riesgos (ISO 31000)",
@@ -72,6 +76,7 @@ const CURSOS: ProgramaItem[] = [
       "Programa enfocado en la identificación, análisis y tratamiento de riesgos organizacionales bajo el marco ISO 31000, fortaleciendo la toma de decisiones estratégicas y la resiliencia empresarial.",
     icon: "ShieldAlert",
     iconColor: "#F59E0B",
+    image: "/formation/iso.png",
   },
   {
     title: "Seguridad de la Cadena de Suministro (BASC, OEA, ISO 28000)",
@@ -81,6 +86,7 @@ const CURSOS: ProgramaItem[] = [
       "Capacitación en implementación y mantenimiento de sistemas de gestión de seguridad logística basados en estándares internacionales, orientada a proteger operaciones y garantizar cumplimiento en comercio internacional.",
     icon: "PackageCheck",
     iconColor: "#16A34A",
+    image: "/formation/cadena.png",
   },
   {
     title: "Curso Auditor OEA-BASC",
@@ -90,6 +96,7 @@ const CURSOS: ProgramaItem[] = [
       "Entrenamiento especializado para desarrollar competencias de auditoría en estándares OEA y BASC, incluyendo evaluación de controles, verificación de cumplimiento y elaboración de informes técnicos.",
     icon: "ClipboardCheck",
     iconColor: "#7C3AED",
+    image: "/formation/basc.png",
   },
   {
     title: "Aprovechamiento de Acuerdos Internacionales con Criterios de Origen",
@@ -99,6 +106,7 @@ const CURSOS: ProgramaItem[] = [
       "Programa orientado a maximizar beneficios arancelarios mediante el correcto uso de tratados comerciales, aplicación de reglas de origen y gestión documental asociada al comercio exterior.",
     icon: "Handshake",
     iconColor: "#DC2626",
+    image: "/formation/acuerdos.png",
   },
 ];
 
@@ -205,16 +213,33 @@ export default function FormacionPage() {
             id="oferta-formacion"
           >
             <div className="mx-auto max-w-7xl px-6">
-              <h1
-                id="oferta-titulo"
-                className="flex items-start gap-3 text-3xl font-semibold tracking-tight text-foreground md:text-4xl lg:text-5xl"
-              >
-                <span className="mt-1.5 h-12 w-1 shrink-0 rounded-full bg-accent md:h-14" aria-hidden />
-                <span>Oferta de formación especializada</span>
-              </h1>
-              <p className="mt-3 max-w-2xl text-base text-muted-foreground md:text-lg">
-                {INTRO}
-              </p>
+              <div className="flex flex-col gap-8 md:gap-12 md:flex-row-reverse md:items-center">
+                <div className="relative w-full shrink-0 overflow-hidden rounded-2xl shadow-lg md:w-[48%]">
+                  <div className="aspect-[16/10] relative w-full">
+                    <Image
+                      src="/formation/oferta.png"
+                      alt="Oferta de formación especializada VÉRTICE"
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 48vw"
+                      priority
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+                  </div>
+                </div>
+                <div className="flex flex-col justify-center gap-4 md:w-[52%]">
+                  <h1
+                    id="oferta-titulo"
+                    className="flex items-start gap-3 text-3xl font-semibold tracking-tight text-foreground md:text-4xl lg:text-5xl"
+                  >
+                    <span className="mt-1.5 h-12 w-1 shrink-0 rounded-full bg-accent md:h-14" aria-hidden />
+                    <span>Oferta de formación especializada</span>
+                  </h1>
+                  <p className="mt-1 max-w-2xl text-base text-muted-foreground md:text-lg">
+                    {INTRO}
+                  </p>
+                </div>
+              </div>
             </div>
           </section>
         </AnimateIn>
@@ -235,30 +260,63 @@ export default function FormacionPage() {
               <div className="mt-10">
                 <ProgramasCarousel items={CURSOS} headingId="programa-actual-titulo" />
               </div>
-              <h2
-                id="cursos-titulo"
-                className="mt-12 border-b-2 border-accent pb-2 text-2xl font-semibold tracking-tight text-foreground md:text-3xl"
-              >
-                Cursos cortos especializados
-              </h2>
-              <ul className="mt-10 space-y-6">
-                {CURSOS.map((curso, index) => (
-                  <li
-                    key={curso.title}
-                    className="rounded-2xl border border-border bg-card-bg p-6 shadow-sm md:p-8"
-                  >
-                    <h3 className="text-lg font-semibold text-primary md:text-xl">
-                      {index + 1}. {curso.title}
-                    </h3>
-                    <p className="mt-2 text-base leading-relaxed text-muted-foreground">
-                      {curso.descriptionLista ?? curso.description}
-                    </p>
-                  </li>
-                ))}
-              </ul>
             </div>
           </section>
         </AnimateIn>
+
+        <section className="bg-surface/80 py-12 md:py-20" aria-labelledby="cursos-titulo" id="cursos-cortos-especializados">
+          <div className="mx-auto max-w-7xl px-6">
+            <h2
+              id="cursos-titulo"
+              className="mb-12 flex items-start gap-3 text-2xl font-semibold tracking-tight text-foreground md:text-3xl lg:text-4xl"
+            >
+              <span className="mt-1 h-9 w-1 shrink-0 rounded-full bg-accent md:h-10" aria-hidden />
+              <span>Cursos cortos especializados</span>
+            </h2>
+            <div className="flex flex-col gap-20 md:gap-28">
+              {CURSOS.map((curso, index) => {
+                const isEven = index % 2 === 0;
+                return (
+                  <AnimateIn
+                    key={curso.title}
+                    delay={Math.min(index, 5) as 0 | 1 | 2 | 3 | 4 | 5}
+                  >
+                    <div
+                      className={`flex flex-col gap-8 md:gap-12 md:items-center ${isEven ? "md:flex-row" : "md:flex-row-reverse"}`}
+                    >
+                      <div className="relative w-full shrink-0 overflow-hidden rounded-2xl shadow-lg md:w-[48%]">
+                        <div className="aspect-[16/10] relative w-full">
+                          <Image
+                            src={curso.image}
+                            alt={curso.title}
+                            fill
+                            className="object-cover"
+                            sizes="(max-width: 768px) 100vw, 48vw"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+                        </div>
+                      </div>
+                      <div className="flex flex-col justify-center gap-4 md:w-[52%]">
+                        <div className="flex items-center gap-3">
+                          <span className="h-8 w-1 shrink-0 rounded-full bg-accent" aria-hidden />
+                          <span className="text-xs font-semibold uppercase tracking-widest text-accent">
+                            Curso
+                          </span>
+                        </div>
+                        <h3 className="text-2xl font-semibold tracking-tight text-foreground md:text-3xl lg:text-4xl">
+                          {curso.title}
+                        </h3>
+                        <p className="text-base leading-relaxed text-muted-foreground md:text-lg">
+                          {curso.descriptionLista ?? curso.description}
+                        </p>
+                      </div>
+                    </div>
+                  </AnimateIn>
+                );
+              })}
+            </div>
+          </div>
+        </section>
 
         <AnimateIn delay={2}>
           <section
