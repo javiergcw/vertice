@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useId, useState } from "react";
 import { createPortal } from "react-dom";
-import { X } from "lucide-react";
+import { CheckCircle2, X } from "lucide-react";
 
 const DARK_BLUE = "#002855";
 const LIGHT_GRAY = "#f4f4f4";
@@ -59,16 +59,25 @@ type MMGSCSAutoevaluacionModalProps = {
 
 export function MMGSCSAutoevaluacionModal({ open, onClose }: MMGSCSAutoevaluacionModalProps) {
   const titleId = useId();
+  const thankYouTitleId = useId();
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [showThankYou, setShowThankYou] = useState(false);
 
   const handleClose = useCallback(() => {
+    setShowThankYou(false);
+    onClose();
+  }, [onClose]);
+
+  const dismissThankYou = useCallback(() => {
+    setShowThankYou(false);
     onClose();
   }, [onClose]);
 
   useEffect(() => {
     if (!open) return;
     setSubmitError(null);
+    setShowThankYou(false);
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     return () => {
@@ -79,11 +88,13 @@ export function MMGSCSAutoevaluacionModal({ open, onClose }: MMGSCSAutoevaluacio
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") handleClose();
+      if (e.key !== "Escape") return;
+      if (showThankYou) dismissThankYou();
+      else handleClose();
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [open, handleClose]);
+  }, [open, handleClose, showThankYou, dismissThankYou]);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -112,7 +123,7 @@ export function MMGSCSAutoevaluacionModal({ open, onClose }: MMGSCSAutoevaluacio
         return;
       }
       form.reset();
-      handleClose();
+      setShowThankYou(true);
     } catch {
       setSubmitError("Error de conexión. Intenta de nuevo.");
     } finally {
@@ -333,7 +344,66 @@ export function MMGSCSAutoevaluacionModal({ open, onClose }: MMGSCSAutoevaluacio
     </div>
   );
 
-  return createPortal(overlay, document.body);
+  const thankYouLayer =
+    showThankYou ? (
+      <div
+        className="fixed inset-0 z-[10001] flex items-center justify-center p-4"
+        role="presentation"
+      >
+        <button
+          type="button"
+          aria-label="Cerrar"
+          className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+          onClick={dismissThankYou}
+        />
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby={thankYouTitleId}
+          className="relative w-full max-w-lg rounded-2xl border border-border bg-white p-6 shadow-2xl sm:p-8"
+        >
+          <div className="flex flex-col items-center text-center sm:items-start sm:text-left">
+            <span
+              className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-primary"
+              aria-hidden
+            >
+              <CheckCircle2 className="h-8 w-8" strokeWidth={2} />
+            </span>
+            <h2
+              id={thankYouTitleId}
+              className="text-xl font-semibold tracking-tight text-foreground sm:text-2xl"
+            >
+              Solicitud registrada correctamente
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-muted-foreground">
+              Agradecemos su confianza en VÉRTICE. Hemos recibido sus datos y un miembro de nuestro
+              equipo se pondrá en contacto con usted a la mayor brevedad para coordinar los
+              siguientes pasos y acompañarle en el inicio del proceso de autoevaluación MMGSCS,
+              resolviendo con el rigor que merece su organización cualquier consulta previa.
+            </p>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+              Mientras tanto, puede revisar su bandeja de entrada (y la carpeta de spam) por si
+              requerimos información adicional.
+            </p>
+            <button
+              type="button"
+              onClick={dismissThankYou}
+              className="mt-8 w-full rounded-lg bg-primary px-6 py-3 text-base font-medium text-white transition-colors hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto"
+            >
+              Entendido
+            </button>
+          </div>
+        </div>
+      </div>
+    ) : null;
+
+  return createPortal(
+    <>
+      {overlay}
+      {thankYouLayer}
+    </>,
+    document.body
+  );
 }
 
 type MMGSCSAutoevaluacionLauncherProps = {
