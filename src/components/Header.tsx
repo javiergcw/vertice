@@ -3,6 +3,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { Mail } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 
@@ -135,18 +136,28 @@ export function Header() {
 
         <div className="flex items-center gap-3">
           <Link
+            href="/diagnostico"
+            className={`hidden rounded-lg border px-4 py-2.5 text-sm font-medium transition-colors md:inline-flex md:items-center md:justify-center lg:px-5 lg:py-3 lg:text-base ${headerScrolled
+              ? "border-white/50 text-white hover:bg-white/10"
+              : "border-primary text-primary hover:bg-primary/5"
+              }`}
+          >
+            Agenda Diagnóstico
+          </Link>
+          <Link
             href="/contactanos"
-            className={`hidden rounded-lg px-6 py-3 text-base font-medium transition-colors md:inline-block ${headerScrolled
+            aria-label="Contáctanos"
+            className={`hidden h-11 w-11 items-center justify-center rounded-lg transition-colors md:inline-flex ${headerScrolled
               ? "bg-accent text-white hover:bg-accent-hover"
               : "bg-primary text-white hover:bg-primary-hover"
               }`}
           >
-            Contáctanos
+            <Mail className="h-5 w-5" strokeWidth={2} aria-hidden />
           </Link>
 
           {/* LinkedIn */}
           <a
-            href="https://www.linkedin.com/company/vertice-consultoria/"
+            href="https://www.linkedin.com/company/v%C3%A9rtice-consulting/about/?viewAsMember=true"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn de VÉRTICE"
@@ -216,19 +227,31 @@ export function Header() {
                 );
               })}
 
+              <Link
+                href="/diagnostico"
+                className={`mt-3 rounded-lg border px-4 py-3 text-center text-base font-medium ${headerScrolled
+                  ? "border-white/50 text-white hover:bg-white/10"
+                  : "border-primary text-primary hover:bg-primary/5"
+                  }`}
+                onClick={() => setOpen(false)}
+              >
+                Agenda Diagnóstico
+              </Link>
+
               <div className="mt-3 flex items-center gap-3">
                 <Link
                   href="/contactanos"
-                  className={`flex-1 rounded-lg px-6 py-3 text-center text-base font-medium text-white ${headerScrolled
+                  aria-label="Contáctanos"
+                  className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-lg text-white ${headerScrolled
                     ? "bg-accent hover:bg-accent-hover"
                     : "bg-primary hover:bg-primary-hover"
                     }`}
                   onClick={() => setOpen(false)}
                 >
-                  Contáctanos
+                  <Mail className="h-5 w-5" strokeWidth={2} aria-hidden />
                 </Link>
                 <a
-                  href="https://www.linkedin.com/company/vertice-consultoria/"
+                  href="https://www.linkedin.com/company/v%C3%A9rtice-consulting/about/?viewAsMember=true"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="LinkedIn de VÉRTICE"

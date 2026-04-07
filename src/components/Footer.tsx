@@ -105,7 +105,7 @@ export function Footer() {
               </li>
             </ul>
             <a
-              href="https://www.linkedin.com/company/vertice-consultoria/"
+              href="https://www.linkedin.com/company/v%C3%A9rtice-consulting/about/?viewAsMember=true"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn de VÉRTICE"

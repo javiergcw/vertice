@@ -105,6 +105,7 @@ export function ContactForm() {
           className="h-11 w-full rounded-lg border border-border bg-white px-4 py-2.5 text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
         >
           <option value="">Seleccione un motivo</option>
+          <option value="diagnostico">Agenda diagnóstico</option>
           <option value="consultoria">Consultoría</option>
           <option value="formacion">Formación</option>
           <option value="comercio-exterior">Comercio exterior</option>

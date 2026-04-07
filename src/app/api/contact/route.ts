@@ -10,6 +10,7 @@ type ContactBody = {
 };
 
 const MOTIVO_LABELS: Record<string, string> = {
+  diagnostico: "Agenda diagnóstico",
   consultoria: "Consultoría",
   formacion: "Formación",
   "comercio-exterior": "Comercio exterior",
